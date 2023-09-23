@@ -1,35 +1,21 @@
 //your code here
-let bandNames = ['The Virupaksha Temple', 'a Victoria Memorial', 'an Tajmahal'];
 
-function sortBandNames(bandNames) {
-  const sortedBandNames = bandNames.slice().sort((a, b) => {
-    // Function to remove articles and trim the names
-    const removeArticle = name => name.replace(/^(a|an|the)\s+/i, '').trim();
+let bandNames = ['The Beatles', 'Rolling Stones', 'Led Zeppelin', 'The Who', 'Aerosmith', 'Nirvana'];
 
-    const nameA = removeArticle(a).toLowerCase();
-    const nameB = removeArticle(b).toLowerCase();
-
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
-    return 0;
-  });
-
-  return sortedBandNames;
+// Remove articles ('a', 'an', 'the') from the band names
+function removeArticles(name) {
+    return name.replace(/^(a|an|the)\s+/i, '');
 }
 
-// Sort the band names without articles
-let sortedBandNames = sortBandNames(bandNames);
+// Sort the band names in lexicographic order without articles
+bandNames.sort((a, b) => removeArticles(a).localeCompare(removeArticles(b)));
 
-// Display the sorted band names inside the ul with id 'band'
-const bandList = document.getElementById('band');
+// Get the ul element to insert the list items
+const ulElement = document.getElementById('band');
 
-sortedBandNames.forEach(bandName => {
-  const listItem = document.createElement('li');
-  listItem.textContent = bandName;
-  bandList.appendChild(listItem);
+// Create and append list items for each band name
+bandNames.forEach(name => {
+    const liElement = document.createElement('li');
+    liElement.textContent = name;
+    ulElement.appendChild(liElement);
 });
-
-
-
-
-
